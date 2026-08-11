@@ -1,0 +1,44 @@
+.editorWrapper {
+  flex: 1;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.emptyEditor {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-editor-group);
+}
+
+.emptyContent {
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.emptyContent h1 {
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--text-primary);
+  margin: 0 0 8px;
+}
+
+.emptyContent p {
+  font-size: 13px;
+  margin: 0 0 20px;
+}
+
+.newFileBtn {
+  background: var(--accent-soft);
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.newFileBtn:hover {
+  background: var(--accent);
+}

@@ -1,0 +1,21 @@
+.statusBar {
+  height: 24px;
+  background: var(--bg-statusbar);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.left, .right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.item {
+  white-space: nowrap;
+}
