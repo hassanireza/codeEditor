@@ -1,0 +1,253 @@
+<svg viewBox="0 0 1200 320" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+  <defs>
+    <!-- Background gradient: deep dark to slightly lighter -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#161b22;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1c2128;stop-opacity:1" />
+    </linearGradient>
+    <!-- Accent glow -->
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#646CFF;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#61DAFB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3178C6;stop-opacity:1" />
+    </linearGradient>
+    <!-- Editor window gradient -->
+    <linearGradient id="windowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e2228;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#161b22;stop-opacity:1" />
+    </linearGradient>
+    <!-- Glow filter for accent bar -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Grid pattern -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-width="0.15" opacity="0.08"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="320" fill="url(#bgGrad)" rx="12"/>
+  <!-- Subtle grid overlay -->
+  <rect width="1200" height="320" fill="url(#grid)" rx="12"/>
+
+  <!-- Decorative glow circle top-left -->
+  <ellipse cx="80" cy="60" rx="120" ry="120" fill="#646CFF" opacity="0.06"/>
+  <!-- Decorative glow circle bottom-right -->
+  <ellipse cx="1150" cy="280" rx="150" ry="150" fill="#61DAFB" opacity="0.05"/>
+  <!-- Mid accent -->
+  <ellipse cx="600" cy="320" rx="300" ry="100" fill="#3178C6" opacity="0.04"/>
+
+  <!-- Top accent bar (gradient line) -->
+  <rect x="0" y="0" width="1200" height="3" fill="url(#accentGrad)" rx="12" filter="url(#glow)"/>
+
+  <!-- ── LEFT SIDE: Text content ── -->
+
+  <!-- App icon circle -->
+  <circle cx="90" cy="130" r="38" fill="#1e2228" stroke="#646CFF" stroke-width="1.5" opacity="0.9"/>
+  <!-- VS Code-ish icon inside circle -->
+  <path d="M76 118 L88 128 L76 138 L70 134 L80 128 L70 122 Z" fill="#61DAFB"/>
+  <path d="M90 118 L102 108 L108 112 L95 128 L108 144 L102 148 L90 138 L84 128 Z" fill="#646CFF"/>
+
+  <!-- Headline -->
+  <text x="148" y="115" font-size="38" font-weight="700" letter-spacing="-0.5" fill="#ffffff">Code Editor</text>
+  <!-- Gradient underline for headline -->
+  <rect x="148" y="122" width="310" height="2.5" fill="url(#accentGrad)" rx="2"/>
+
+  <!-- Tagline -->
+  <text x="148" y="152" font-size="15" fill="#8b949e" letter-spacing="0.2">VS Code–inspired · Browser-based · Zero backend</text>
+
+  <!-- Feature pills row 1 -->
+  <!-- Monaco -->
+  <rect x="148" y="172" width="114" height="26" rx="13" fill="#21262d" stroke="#30363d" stroke-width="1"/>
+  <circle cx="168" cy="185" r="6" fill="#68217A"/>
+  <text x="180" y="190" font-size="12" fill="#c9d1d9">Monaco Editor</text>
+
+  <!-- TypeScript -->
+  <rect x="272" y="172" width="102" height="26" rx="13" fill="#21262d" stroke="#30363d" stroke-width="1"/>
+  <rect x="282" y="178" width="14" height="14" rx="2" fill="#3178C6"/>
+  <text x="285" y="189" font-size="9" font-weight="700" fill="#fff">TS</text>
+  <text x="302" y="190" font-size="12" fill="#c9d1d9">TypeScript</text>
+
+  <!-- React -->
+  <rect x="384" y="172" width="82" height="26" rx="13" fill="#21262d" stroke="#30363d" stroke-width="1"/>
+  <circle cx="399" cy="185" r="6" fill="none" stroke="#61DAFB" stroke-width="1.5"/>
+  <circle cx="399" cy="185" r="2" fill="#61DAFB"/>
+  <text x="411" y="190" font-size="12" fill="#c9d1d9">React 19</text>
+
+  <!-- Feature pills row 2 -->
+  <!-- FSAA -->
+  <rect x="148" y="208" width="134" height="26" rx="13" fill="#21262d" stroke="#30363d" stroke-width="1"/>
+  <text x="168" y="226" font-size="16" fill="#F59E0B">📁</text>
+  <text x="191" y="226" font-size="12" fill="#c9d1d9">Real File Access</text>
+
+  <!-- Auto-detect -->
+  <rect x="292" y="208" width="120" height="26" rx="13" fill="#21262d" stroke="#30363d" stroke-width="1"/>
+  <text x="308" y="226" font-size="16" fill="#22C55E">🔍</text>
+  <text x="331" y="226" font-size="12" fill="#c9d1d9">Auto Language</text>
+
+  <!-- Multi-tab -->
+  <rect x="422" y="208" width="94" height="26" rx="13" fill="#21262d" stroke="#30363d" stroke-width="1"/>
+  <text x="438" y="226" font-size="16" fill="#61DAFB">🗂</text>
+  <text x="459" y="226" font-size="12" fill="#c9d1d9">Multi-Tab</text>
+
+  <!-- Quick start commands -->
+  <rect x="148" y="248" width="340" height="48" rx="8" fill="#0d1117" stroke="#21262d" stroke-width="1"/>
+  <text x="168" y="269" font-size="12" fill="#8b949e" font-family="monospace">$</text>
+  <text x="181" y="269" font-size="12" fill="#22C55E" font-family="monospace">npm install</text>
+  <text x="168" y="287" font-size="12" fill="#8b949e" font-family="monospace">$</text>
+  <text x="181" y="287" font-size="12" fill="#22C55E" font-family="monospace">npm run dev</text>
+
+  <!-- ── RIGHT SIDE: Mini editor window mockup ── -->
+
+  <!-- Editor window outer shadow/glow -->
+  <rect x="570" y="28" width="610" height="264" rx="10" fill="#646CFF" opacity="0.08"/>
+
+  <!-- Editor window frame -->
+  <rect x="568" y="26" width="610" height="264" rx="10" fill="url(#windowGrad)" stroke="#30363d" stroke-width="1"/>
+
+  <!-- Title bar -->
+  <rect x="568" y="26" width="610" height="30" rx="10" fill="#1c2128"/>
+  <rect x="568" y="44" width="610" height="12" fill="#1c2128"/>
+
+  <!-- Traffic lights -->
+  <circle cx="592" cy="41" r="6" fill="#FF5F57"/>
+  <circle cx="612" cy="41" r="6" fill="#FEBC2E"/>
+  <circle cx="632" cy="41" r="6" fill="#28C840"/>
+
+  <!-- Title bar text -->
+  <text x="660" y="46" font-size="12" fill="#8b949e" text-anchor="middle" font-family="monospace">● App.tsx</text>
+  <text x="730" y="46" font-size="12" fill="#6e7681" text-anchor="middle" font-family="monospace">useEditorStore.ts</text>
+  <text x="820" y="46" font-size="12" fill="#6e7681" text-anchor="middle" font-family="monospace">fileSystem.ts</text>
+
+  <!-- Activity bar strip (narrow left) -->
+  <rect x="568" y="56" width="36" height="234" rx="0" fill="#1c2128"/>
+  <!-- Activity bar icons -->
+  <text x="578" y="80" font-size="16">📁</text>
+  <text x="578" y="110" font-size="16">🔍</text>
+  <text x="578" y="140" font-size="16">⚙️</text>
+  <text x="578" y="268" font-size="16">🌗</text>
+
+  <!-- Sidebar (file tree) -->
+  <rect x="604" y="56" width="140" height="234" fill="#161b22"/>
+  <!-- Sidebar header -->
+  <text x="614" y="74" font-size="10" fill="#6e7681" font-weight="600" letter-spacing="1">EXPLORER</text>
+  <!-- File tree items -->
+  <text x="614" y="93" font-size="11" fill="#8b949e" font-family="monospace">📂 src</text>
+  <text x="624" y="109" font-size="11" fill="#8b949e" font-family="monospace">📂 components</text>
+  <text x="634" y="125" font-size="11" fill="#8b949e" font-family="monospace">📂 Editor</text>
+  <text x="644" y="141" font-size="11" fill="#c9d1d9" font-family="monospace">🔷 EditorPanel.tsx</text>
+  <text x="634" y="157" font-size="11" fill="#8b949e" font-family="monospace">📂 Sidebar</text>
+  <text x="644" y="173" font-size="11" fill="#8b949e" font-family="monospace">🔷 Sidebar.tsx</text>
+  <text x="634" y="189" font-size="11" fill="#8b949e" font-family="monospace">📂 Tabs</text>
+  <text x="624" y="205" font-size="11" fill="#8b949e" font-family="monospace">📂 lib</text>
+  <text x="634" y="221" font-size="11" fill="#8b949e" font-family="monospace">📄 fileSystem.ts</text>
+  <text x="634" y="237" font-size="11" fill="#8b949e" font-family="monospace">📄 languageDetect.ts</text>
+  <text x="624" y="253" font-size="11" fill="#8b949e" font-family="monospace">📂 store</text>
+  <text x="634" y="269" font-size="11" fill="#8b949e" font-family="monospace">🔷 useEditorStore.ts</text>
+
+  <!-- Highlight selected file -->
+  <rect x="604" y="130" width="140" height="16" fill="#264F78" opacity="0.6" rx="2"/>
+
+  <!-- Editor code area -->
+  <rect x="744" y="56" width="434" height="234" fill="#1e2228"/>
+
+  <!-- Line numbers column -->
+  <rect x="744" y="56" width="34" height="234" fill="#1c2128"/>
+
+  <!-- Line numbers -->
+  <text x="755" y="78" font-size="10" fill="#4d5566" font-family="monospace" text-anchor="middle">1</text>
+  <text x="755" y="94" font-size="10" fill="#4d5566" font-family="monospace" text-anchor="middle">2</text>
+  <text x="755" y="110" font-size="10" fill="#4d5566" font-family="monospace" text-anchor="middle">3</text>
+  <text x="755" y="126" font-size="10" fill="#4d5566" font-family="monospace" text-anchor="middle">4</text>
+  <text x="755" y="142" font-size="10" fill="#4d5566" font-family="monospace" text-anchor="middle">5</text>
+  <text x="755" y="158" font-size="10" fill="#4d5566" font-family="monospace" text-anchor="middle">6</text>
+  <text x="755" y="174" font-size="10" fill="#c9d1d9" font-family="monospace" text-anchor="middle">7</text>
+  <text x="755" y="190" font-size="10" fill="#4d5566" font-family="monospace" text-anchor="middle">8</text>
+  <text x="755" y="206" font-size="10" fill="#4d5566" font-family="monospace" text-anchor="middle">9</text>
+  <text x="755" y="222" font-size="10" fill="#4d5566" font-family="monospace" text-anchor="middle">10</text>
+  <text x="755" y="238" font-size="10" fill="#4d5566" font-family="monospace" text-anchor="middle">11</text>
+  <text x="755" y="254" font-size="10" fill="#4d5566" font-family="monospace" text-anchor="middle">12</text>
+  <text x="755" y="270" font-size="10" fill="#4d5566" font-family="monospace" text-anchor="middle">13</text>
+
+  <!-- Code syntax highlight (EditorPanel.tsx mockup) -->
+  <!-- Line 1: import -->
+  <text x="786" y="78" font-size="10.5" fill="#C586C0" font-family="'Cascadia Code', 'Fira Code', monospace">import</text>
+  <text x="826" y="78" font-size="10.5" fill="#c9d1d9" font-family="monospace"> { </text>
+  <text x="843" y="78" font-size="10.5" fill="#9CDCFE" font-family="monospace">useEditorStore</text>
+  <text x="941" y="78" font-size="10.5" fill="#c9d1d9" font-family="monospace"> } </text>
+  <text x="956" y="78" font-size="10.5" fill="#C586C0" font-family="monospace">from</text>
+
+  <!-- Line 2 -->
+  <text x="786" y="94" font-size="10.5" fill="#ce9178" font-family="monospace">  '../../store/useEditorStore'</text>
+
+  <!-- Line 3: blank -->
+
+  <!-- Line 4: function -->
+  <text x="786" y="126" font-size="10.5" fill="#C586C0" font-family="monospace">export default function </text>
+  <text x="948" y="126" font-size="10.5" fill="#DCDCAA" font-family="monospace">EditorPanel</text>
+  <text x="1009" y="126" font-size="10.5" fill="#c9d1d9" font-family="monospace">() {</text>
+
+  <!-- Line 5: const -->
+  <text x="786" y="142" font-size="10.5" fill="#c9d1d9" font-family="monospace">  </text>
+  <text x="796" y="142" font-size="10.5" fill="#569CD6" font-family="monospace">const</text>
+  <text x="824" y="142" font-size="10.5" fill="#9CDCFE" font-family="monospace"> activeTab</text>
+  <text x="887" y="142" font-size="10.5" fill="#c9d1d9" font-family="monospace"> = </text>
+  <text x="905" y="142" font-size="10.5" fill="#DCDCAA" font-family="monospace">useEditorStore</text>
+
+  <!-- Cursor line highlight -->
+  <rect x="778" y="164" width="390" height="14" fill="#264F78" opacity="0.3"/>
+  <!-- Line 7: active line -->
+  <text x="786" y="174" font-size="10.5" fill="#c9d1d9" font-family="monospace">    (s) </text>
+  <text x="824" y="174" font-size="10.5" fill="#c9d1d9" font-family="monospace">=&gt; </text>
+  <text x="847" y="174" font-size="10.5" fill="#9CDCFE" font-family="monospace">s</text>
+  <text x="853" y="174" font-size="10.5" fill="#c9d1d9" font-family="monospace">.</text>
+  <text x="858" y="174" font-size="10.5" fill="#9CDCFE" font-family="monospace">tabs</text>
+  <text x="882" y="174" font-size="10.5" fill="#c9d1d9" font-family="monospace">.</text>
+  <text x="887" y="174" font-size="10.5" fill="#DCDCAA" font-family="monospace">find</text>
+  <text x="910" y="174" font-size="10.5" fill="#c9d1d9" font-family="monospace">(t =&gt; t.</text>
+  <text x="957" y="174" font-size="10.5" fill="#9CDCFE" font-family="monospace">id</text>
+  <!-- Blinking cursor -->
+  <rect x="980" y="163" width="2" height="13" fill="#c9d1d9" opacity="0.9"/>
+
+  <!-- Lines 8-13: more code -->
+  <text x="786" y="190" font-size="10.5" fill="#c9d1d9" font-family="monospace">      === </text>
+  <text x="843" y="190" font-size="10.5" fill="#9CDCFE" font-family="monospace">s.activeTabId</text>
+  <text x="940" y="190" font-size="10.5" fill="#c9d1d9" font-family="monospace">);</text>
+
+  <text x="786" y="206" font-size="10.5" fill="#c9d1d9" font-family="monospace"></text>
+
+  <text x="786" y="222" font-size="10.5" fill="#c9d1d9" font-family="monospace">  </text>
+  <text x="796" y="222" font-size="10.5" fill="#C586C0" font-family="monospace">return</text>
+  <text x="832" y="222" font-size="10.5" fill="#c9d1d9" font-family="monospace"> (</text>
+
+  <text x="786" y="238" font-size="10.5" fill="#4EC9B0" font-family="monospace">    &lt;Editor</text>
+
+  <text x="786" y="254" font-size="10.5" fill="#9CDCFE" font-family="monospace">      language</text>
+  <text x="858" y="254" font-size="10.5" fill="#c9d1d9" font-family="monospace">={</text>
+  <text x="872" y="254" font-size="10.5" fill="#9CDCFE" font-family="monospace">activeTab</text>
+  <text x="923" y="254" font-size="10.5" fill="#c9d1d9" font-family="monospace">?.</text>
+  <text x="934" y="254" font-size="10.5" fill="#9CDCFE" font-family="monospace">language</text>
+  <text x="991" y="254" font-size="10.5" fill="#c9d1d9" font-family="monospace">}</text>
+
+  <text x="786" y="270" font-size="10.5" fill="#9CDCFE" font-family="monospace">      value</text>
+  <text x="838" y="270" font-size="10.5" fill="#c9d1d9" font-family="monospace">={</text>
+  <text x="852" y="270" font-size="10.5" fill="#9CDCFE" font-family="monospace">activeTab</text>
+  <text x="903" y="270" font-size="10.5" fill="#c9d1d9" font-family="monospace">?.</text>
+  <text x="914" y="270" font-size="10.5" fill="#9CDCFE" font-family="monospace">content</text>
+  <text x="963" y="270" font-size="10.5" fill="#c9d1d9" font-family="monospace">}</text>
+
+  <!-- Status bar -->
+  <rect x="568" y="278" width="610" height="12" rx="0" fill="#646CFF" opacity="0.8"/>
+  <text x="578" y="288" font-size="9" fill="#ffffff" font-family="monospace" opacity="0.9">main</text>
+  <text x="750" y="288" font-size="9" fill="#ffffff" font-family="monospace" opacity="0.9" text-anchor="middle">TypeScript React</text>
+  <text x="1148" y="288" font-size="9" fill="#ffffff" font-family="monospace" opacity="0.9" text-anchor="end">Ln 7, Col 22</text>
+
+  <!-- Bottom accent line -->
+  <rect x="0" y="317" width="1200" height="3" fill="url(#accentGrad)" rx="12"/>
+</svg>
