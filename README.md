@@ -22,7 +22,7 @@
 <br/><br/>
 
 <p align="center">
-  <strong>A VS Code–inspired, fully browser-based code editor — zero backend, real file system access, Monaco power.</strong><br/>
+  <strong>A VS Code-inspired, fully browser-based code editor - zero backend, real file system access, Monaco power.</strong><br/>
   Open folders, edit files, save directly to disk. Works entirely in your browser tab.
 </p>
 
@@ -47,13 +47,13 @@
 <td width="50%" valign="top">
 
 ### 🧠 Monaco Editor at the Core
-The same engine powering VS Code — bracket colorization, minimap, smooth cursor animations, multi-cursor editing, and IntelliSense-ready architecture. No compromise on editing quality.
+The same engine powering VS Code - bracket colorization, minimap, smooth cursor animations, multi-cursor editing, and IntelliSense-ready architecture. No compromise on editing quality.
 
 </td>
 <td width="50%" valign="top">
 
 ### 🔍 Auto Language Detection
-Drop any file — TypeScript, Python, Rust, SQL, YAML, GraphQL, and 30+ more — and the language mode snaps into place automatically, inferred from the file extension with zero manual setup.
+Drop any file - TypeScript, Python, Rust, SQL, YAML, GraphQL, and 30+ more - and the language mode snaps into place automatically, inferred from the file extension with zero manual setup.
 
 </td>
 </tr>
@@ -61,20 +61,20 @@ Drop any file — TypeScript, Python, Rust, SQL, YAML, GraphQL, and 30+ more —
 <td width="50%" valign="top">
 
 ### 📁 Real Folder Explorer
-Open an entire project directory and navigate it in a familiar VS Code–style tree. Directories expand lazily, `node_modules` and `.git` are hidden by default, and the tree refreshes when files change on disk.
+Open an entire project directory and navigate it in a familiar VS Code-style tree. Directories expand lazily, `node_modules` and `.git` are hidden by default, and the tree refreshes when files change on disk.
 
 </td>
 <td width="50%" valign="top">
 
 ### 🗂️ Multi-Tab Workflow
-Work across multiple files simultaneously. Each tab carries its own independent undo/redo history. Unsaved changes surface as a dot indicator — you'll never accidentally close a dirty file.
+Work across multiple files simultaneously. Each tab carries its own independent undo/redo history. Unsaved changes surface as a dot indicator - you'll never accidentally close a dirty file.
 
 </td>
 </tr>
 <tr>
 <td width="50%" valign="top">
 
-### 💾 True Save — Back to Disk
+### 💾 True Save - Back to Disk
 `Ctrl+S` writes directly back to the original file on your file system (no download prompt, no copy-paste). **Save As** and single-file **Open** are also supported with full handle management.
 
 </td>
@@ -89,13 +89,13 @@ Switch between VS Code Dark and Light themes with a single click. Theme preferen
 <td width="50%" valign="top">
 
 ### 🔄 Graceful Fallbacks
-No File System Access API? No problem. On Firefox and Safari the editor automatically falls back to `<input type="file">` for opening and triggers a download for saving — same editing experience, adapted I/O.
+No File System Access API? No problem. On Firefox and Safari the editor automatically falls back to `<input type="file">` for opening and triggers a download for saving - same editing experience, adapted I/O.
 
 </td>
 <td width="50%" valign="top">
 
 ### 🔔 Toast Notifications
-Non-intrusive feedback for every important action — saved, error, info — with auto-dismiss. No dialog boxes, no interruptions to your flow.
+Non-intrusive feedback for every important action - saved, error, info - with auto-dismiss. No dialog boxes, no interruptions to your flow.
 
 </td>
 </tr>
@@ -115,20 +115,20 @@ Non-intrusive feedback for every important action — saved, error, info — wit
 
 <br/>
 
-### 1 — Clone
+### 1 - Clone
 
 ```bash
 git clone https://github.com/your-org/code-editor.git
 cd code-editor
 ```
 
-### 2 — Install
+### 2 - Install
 
 ```bash
 npm install
 ```
 
-### 3 — Run
+### 3 - Run
 
 ```bash
 npm run dev
@@ -150,7 +150,7 @@ npm run preview   # Preview the production output locally
 ### Lint
 
 ```bash
-npm run lint      # Runs oxlint — fast Rust-based linter
+npm run lint      # Runs oxlint - fast Rust-based linter
 ```
 
 <br/>
@@ -177,7 +177,7 @@ npm run lint      # Runs oxlint — fast Rust-based linter
 
 <br/>
 
-> **Why the gap?** "Open Folder" and direct "Save" rely on the [**File System Access API**](https://developer.mozilla.org/en-US/docs/Web/API/File_System_Access_API), a Chromium-only capability. The app detects support at runtime and adjusts automatically — Firefox and Safari users get a seamless upload/download flow instead.
+> **Why the gap?** "Open Folder" and direct "Save" rely on the [**File System Access API**](https://developer.mozilla.org/en-US/docs/Web/API/File_System_Access_API), a Chromium-only capability. The app detects support at runtime and adjusts automatically - Firefox and Safari users get a seamless upload/download flow instead.
 
 <br/>
 
@@ -192,52 +192,52 @@ npm run lint      # Runs oxlint — fast Rust-based linter
 ```
 code-editor/
 ├── public/
-│   ├── favicon.svg              — App icon
-│   └── icons.svg                — SVG sprite sheet
+│   ├── favicon.svg              - App icon
+│   └── icons.svg                - SVG sprite sheet
 │
 ├── src/
 │   ├── components/
-│   │   ├── ActivityBar/         — Left icon strip (explorer toggle, theme toggle)
+│   │   ├── ActivityBar/         - Left icon strip (explorer toggle, theme toggle)
 │   │   │   ├── ActivityBar.tsx
 │   │   │   └── ActivityBar.module.css
 │   │   │
-│   │   ├── Sidebar/             — Folder explorer + lazy file tree
+│   │   ├── Sidebar/             - Folder explorer + lazy file tree
 │   │   │   ├── Sidebar.tsx
 │   │   │   ├── FileTreeNode.tsx
 │   │   │   └── Sidebar.module.css
 │   │   │
-│   │   ├── Tabs/                — Open-file tab bar with dirty indicators
+│   │   ├── Tabs/                - Open-file tab bar with dirty indicators
 │   │   │   ├── TabBar.tsx
 │   │   │   └── TabBar.module.css
 │   │   │
-│   │   ├── Editor/              — Monaco wrapper + Ctrl+S save logic
+│   │   ├── Editor/              - Monaco wrapper + Ctrl+S save logic
 │   │   │   ├── EditorPanel.tsx
 │   │   │   └── EditorPanel.module.css
 │   │   │
-│   │   ├── StatusBar/           — Bottom status bar (language, cursor position)
+│   │   ├── StatusBar/           - Bottom status bar (language, cursor position)
 │   │   │   ├── StatusBar.tsx
 │   │   │   └── StatusBar.module.css
 │   │   │
-│   │   ├── Toast/               — Auto-dismiss notification toasts
+│   │   ├── Toast/               - Auto-dismiss notification toasts
 │   │   │   ├── Toast.tsx
 │   │   │   └── Toast.module.css
 │   │   │
-│   │   └── TitleBar.tsx         — Top title bar
+│   │   └── TitleBar.tsx         - Top title bar
 │   │
 │   ├── lib/
-│   │   ├── fileSystem.ts        — File System Access API wrapper + fallbacks
-│   │   ├── languageDetect.ts    — Extension → Monaco language ID mapping (30+ langs)
-│   │   └── monacoSetup.ts       — Monaco initialization & worker config
+│   │   ├── fileSystem.ts        - File System Access API wrapper + fallbacks
+│   │   ├── languageDetect.ts    - Extension → Monaco language ID mapping (30+ langs)
+│   │   └── monacoSetup.ts       - Monaco initialization & worker config
 │   │
 │   ├── store/
-│   │   └── useEditorStore.ts    — Zustand store: tabs, tree, theme, toasts
+│   │   └── useEditorStore.ts    - Zustand store: tabs, tree, theme, toasts
 │   │
 │   ├── types/
-│   │   └── index.ts             — Shared TypeScript types + FSAA global augmentations
+│   │   └── index.ts             - Shared TypeScript types + FSAA global augmentations
 │   │
-│   ├── App.tsx                  — Root layout, theme sync, beforeunload guard
-│   ├── main.tsx                 — React 19 entry point
-│   └── index.css                — Global CSS reset + design tokens
+│   ├── App.tsx                  - Root layout, theme sync, beforeunload guard
+│   ├── main.tsx                 - React 19 entry point
+│   └── index.css                - Global CSS reset + design tokens
 │
 ├── vite.config.ts
 ├── tsconfig.json
@@ -255,7 +255,7 @@ code-editor/
 
 <br/>
 
-The app follows a **flat Zustand store** pattern — all mutable state (tabs, file tree, theme, toasts) lives in a single `useEditorStore`, with components subscribing only to slices they need. This keeps re-renders minimal and state updates predictable.
+The app follows a **flat Zustand store** pattern - all mutable state (tabs, file tree, theme, toasts) lives in a single `useEditorStore`, with components subscribing only to slices they need. This keeps re-renders minimal and state updates predictable.
 
 <br/>
 
@@ -315,7 +315,7 @@ The app follows a **flat Zustand store** pattern — all mutable state (tabs, fi
 | Shortcut | Action |
 |----------|--------|
 | `Ctrl + S` / `Cmd + S` | Save file to disk (in-place if opened via handle) |
-| `Ctrl + Shift + S` / `Cmd + Shift + S` | Save As — choose a new location |
+| `Ctrl + Shift + S` / `Cmd + Shift + S` | Save As - choose a new location |
 | `Ctrl + W` / `Cmd + W` | Close active tab |
 | `Ctrl + Tab` | Cycle to next tab |
 | `Ctrl + \`` | Toggle sidebar (Explorer) |
