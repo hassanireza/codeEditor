@@ -1,83 +1,220 @@
-:root {
-  --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-mono: "SF Mono", Monaco, "Cascadia Code", "Fira Code", Consolas, monospace;
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&family=JetBrains+Mono:wght@300;400;500&display=swap");
 
-  /* Dark theme (default) */
-  --bg-app: #1e1e1e;
-  --bg-activitybar: #181818;
-  --bg-sidebar: #181818;
-  --bg-editor-group: #1e1e1e;
-  --bg-tab: #181818;
-  --bg-tab-active: #1e1e1e;
-  --bg-statusbar: #007acc;
-  --bg-titlebar: #232323;
-  --bg-hover: #2a2d2e;
-  --bg-selected: #37373d;
-  --border-color: #2b2b2b;
-  --text-primary: #cccccc;
-  --text-secondary: #858585;
-  --text-active: #ffffff;
-  --accent: #007acc;
-  --accent-soft: #0e639c;
-  --danger: #f14c4c;
-  --success: #4ec9b0;
-  --scrollbar: #424242;
-}
+/* =========================================================
+   CODE EDITOR — Abyssal Liturgy design system
+   Aligned with hassanireza.github.io branding.
+   Identity name: "Abyssal Liturgy"
+   ========================================================= */
 
-[data-theme="light"] {
-  --bg-app: #ffffff;
-  --bg-activitybar: #f3f3f3;
-  --bg-sidebar: #f3f3f3;
-  --bg-editor-group: #ffffff;
-  --bg-tab: #ececec;
-  --bg-tab-active: #ffffff;
-  --bg-statusbar: #007acc;
-  --bg-titlebar: #dddddd;
-  --bg-hover: #e8e8e8;
-  --bg-selected: #d6d6d6;
-  --border-color: #e0e0e0;
-  --text-primary: #3b3b3b;
-  --text-secondary: #6e6e6e;
-  --text-active: #000000;
-  --accent: #007acc;
-  --accent-soft: #0e639c;
-  --danger: #cd3131;
-  --success: #14825a;
-  --scrollbar: #c1c1c1;
-}
-
-* {
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-html, body, #root {
-  margin: 0;
-  padding: 0;
+:root {
+  /* ── Palette ── */
+  --bg:              #08090b;   /* Void — primary canvas */
+  --bg-2:            #0d1013;   /* Charcoal — secondary surfaces */
+  --bg-3:            #12161a;   /* Deep Charcoal — nested depth */
+  --bg-4:            #161b1f;   /* Extra depth for active states */
+  --surface:         rgba(214, 219, 222, 0.035);
+  --border:          rgba(214, 219, 222, 0.07);
+  --border-hover:    rgba(214, 219, 222, 0.18);
+  --border-focus:    rgba(201, 207, 210, 0.4);
+
+  /* ── Text ── */
+  --text:            #e6e3da;   /* Bone — headlines, primary */
+  --text-2:          #9aa3a8;   /* Fog — supporting copy */
+  --text-3:          #7f8589;   /* Ash — labels, meta, eyebrows */
+  --text-4:          #4d5560;   /* Deep ash — very quiet UI chrome */
+
+  /* ── Accent ── */
+  --accent:          #7c8891;   /* Oxidized Silver */
+  --accent-dim:      rgba(124, 136, 145, 0.13);
+  --accent-bright:   #c9cfd2;   /* Bright Silver — rare emphasis */
+
+  /* ── Semantic (mapped from palette — no new hues) ── */
+  --success:         #7c8891;   /* same accent, tone carries meaning */
+  --danger:          #9aa3a8;
+  --dirty:           #c9cfd2;
+
+  /* ── Geometry ── */
+  --radius:          2px;       /* Brand rule: near-zero radius */
+  --radius-sm:       1px;
+
+  /* ── Shadows ── */
+  --shadow:          0 1px 3px rgba(0, 0, 0, 0.45), 0 8px 40px rgba(0, 0, 0, 0.55);
+  --shadow-hover:    0 2px 8px rgba(0, 0, 0, 0.5), 0 24px 70px rgba(0, 0, 0, 0.65);
+
+  /* ── Motion — liturgy easing curves ── */
+  --ease:            cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out:        cubic-bezier(0, 0, 0.2, 1);
+  --ease-liturgy:    cubic-bezier(0.16, 0.4, 0.15, 1);
+
+  /* ── Typography ── */
+  --font-display:    "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  --font-body:       "Jost", "DM Sans", system-ui, sans-serif;
+  --font-mono:       "JetBrains Mono", "Cascadia Code", "Fira Code", Consolas, monospace;
+
+  /* ── Editor-specific surface aliases ── */
+  --bg-app:          var(--bg);
+  --bg-activitybar:  var(--bg-2);
+  --bg-sidebar:      var(--bg-2);
+  --bg-editor-group: var(--bg);
+  --bg-tab:          var(--bg-2);
+  --bg-tab-active:   var(--bg);
+  --bg-statusbar:    var(--bg-3);
+  --bg-titlebar:     var(--bg-2);
+  --bg-hover:        rgba(214, 219, 222, 0.04);
+  --bg-selected:     rgba(214, 219, 222, 0.07);
+  --border-color:    var(--border);
+  --text-primary:    var(--text);
+  --text-secondary:  var(--text-3);
+  --text-active:     var(--text);
+  --scrollbar:       rgba(214, 219, 222, 0.12);
+}
+
+/* Light theme — bone on void inverted to void on bone */
+[data-theme="light"] {
+  --bg:              #f5f4f0;
+  --bg-2:            #eeece8;
+  --bg-3:            #e6e3dc;
+  --bg-4:            #dddad2;
+  --surface:         rgba(8, 9, 11, 0.03);
+  --border:          rgba(8, 9, 11, 0.09);
+  --border-hover:    rgba(8, 9, 11, 0.22);
+  --border-focus:    rgba(8, 9, 11, 0.4);
+
+  --text:            #08090b;
+  --text-2:          #3b4045;
+  --text-3:          #6b7278;
+  --text-4:          #9aa3a8;
+
+  --accent:          #5a6268;
+  --accent-dim:      rgba(90, 98, 104, 0.1);
+  --accent-bright:   #12161a;
+
+  --bg-app:          var(--bg);
+  --bg-activitybar:  var(--bg-2);
+  --bg-sidebar:      var(--bg-2);
+  --bg-editor-group: var(--bg);
+  --bg-tab:          var(--bg-2);
+  --bg-tab-active:   var(--bg);
+  --bg-statusbar:    var(--bg-3);
+  --bg-titlebar:     var(--bg-2);
+  --bg-hover:        rgba(8, 9, 11, 0.04);
+  --bg-selected:     rgba(8, 9, 11, 0.07);
+  --border-color:    var(--border);
+  --text-primary:    var(--text);
+  --text-secondary:  var(--text-3);
+  --text-active:     var(--text);
+  --scrollbar:       rgba(8, 9, 11, 0.18);
+}
+
+html,
+body,
+#root {
   height: 100%;
   width: 100%;
   overflow: hidden;
-  font-family: var(--font-ui);
-  background: var(--bg-app);
-  color: var(--text-primary);
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.7;
 }
 
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+/* Noise texture on body — same as portfolio */
+body {
+  background-image:
+    radial-gradient(ellipse 120% 80% at 50% -10%, rgba(124, 136, 145, 0.04), transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.55  0 0 0 0 0.58  0 0 0 0 0.6  0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-attachment: fixed;
 }
-::-webkit-scrollbar-thumb {
-  background: var(--scrollbar);
-  border-radius: 5px;
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+input,
+select {
+  font-family: var(--font-body);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(124, 136, 145, 0.28);
+  color: var(--text);
+}
+
+/* Scrollbars — hairline, liturgy style */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
-
-button {
-  font-family: var(--font-ui);
-  cursor: pointer;
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-3);
 }
 
-input, select {
-  font-family: var(--font-ui);
+/* ── Keyframes ── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes surface {
+  from {
+    opacity: 0;
+    filter: blur(6px) brightness(0.7);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0) brightness(1);
+  }
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) translateX(4px);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) translateX(0);
+    filter: blur(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

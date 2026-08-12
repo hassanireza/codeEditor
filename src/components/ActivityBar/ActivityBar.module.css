@@ -1,46 +1,97 @@
+/* ── ActivityBar ───────────────────────────────────────────
+   Narrow left strip. Icon buttons — hairline active indicator,
+   never filled by default. Everything stays dark until touched.
+   ─────────────────────────────────────────────────────── */
+
 .bar {
-  width: 48px;
-  background: var(--bg-activitybar);
-  border-right: 1px solid var(--border-color);
+  width: 44px;
+  background: var(--bg-2);
+  border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 8px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   flex-shrink: 0;
+  gap: 2px;
 }
 
 .iconButton {
-  width: 48px;
-  height: 44px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: transparent;
   border: none;
-  color: var(--text-secondary);
-  font-size: 20px;
+  color: var(--text-4);
+  font-size: 15px;
   position: relative;
-  transition: color 0.12s ease;
+  transition: color 0.3s var(--ease);
+  border-radius: var(--radius);
+  margin: 0 4px;
 }
 
 .iconButton:hover {
-  color: var(--text-active);
+  color: var(--text-2);
+  background: var(--bg-hover);
 }
 
+/* Active state: hairline left indicator — brand pattern */
 .iconButton.active {
-  color: var(--text-active);
+  color: var(--text);
 }
 
-.iconButton.active::before {
+.iconButton.active::after {
   content: "";
   position: absolute;
-  left: 0;
+  left: -4px;
   top: 8px;
   bottom: 8px;
-  width: 2px;
-  background: var(--accent);
+  width: 1px;
+  background: var(--accent-bright);
+  opacity: 0.7;
+}
+
+/* SVG icons inside buttons */
+.iconButton svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.3s var(--ease);
+}
+
+.iconButton:hover svg {
+  transform: scale(1.08);
 }
 
 .spacer {
   flex: 1;
+}
+
+/* Tooltip — mono label, liturgy style */
+.iconButton[title]:hover::before {
+  content: attr(title);
+  position: absolute;
+  left: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 300;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--text-3);
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--radius);
+  pointer-events: none;
+  z-index: 100;
+  animation: fadeUp 0.2s var(--ease-out);
 }

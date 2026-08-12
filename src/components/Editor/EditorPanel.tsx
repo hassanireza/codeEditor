@@ -5,13 +5,34 @@ import styles from "./EditorPanel.module.css";
 import { useEditorStore } from "../../store/useEditorStore";
 import { downloadFile, saveFileAs, supportsFileSystemAccess, writeFile } from "../../lib/fileSystem";
 
+/** Tidal Halo mark — large, centered in empty canvas */
+function TidalHaloLarge() {
+  return (
+    <svg
+      width="64"
+      height="64"
+      viewBox="0 0 100 100"
+      fill="none"
+      aria-hidden="true"
+    >
+      <circle cx="50" cy="50" r="46" stroke="currentColor" strokeOpacity="0.9" strokeWidth="0.8" />
+      <circle cx="50" cy="50" r="32" stroke="currentColor" strokeOpacity="0.55" strokeWidth="0.8" />
+      <circle cx="50" cy="50" r="18" stroke="currentColor" strokeOpacity="0.3" strokeWidth="0.8" />
+      <line x1="50" y1="4"  x2="50" y2="30" stroke="currentColor" strokeOpacity="0.75" strokeWidth="0.8" />
+      <line x1="42" y1="12" x2="58" y2="12" stroke="currentColor" strokeOpacity="0.75" strokeWidth="0.8" />
+      <line x1="50" y1="70" x2="50" y2="92" stroke="currentColor" strokeOpacity="0.6"  strokeWidth="0.8" />
+      <circle cx="50" cy="92" r="2.2" fill="currentColor" fillOpacity="0.7" />
+    </svg>
+  );
+}
+
 export default function EditorPanel() {
-  const tabs = useEditorStore((s) => s.tabs);
-  const activeTabId = useEditorStore((s) => s.activeTabId);
-  const theme = useEditorStore((s) => s.theme);
+  const tabs             = useEditorStore((s) => s.tabs);
+  const activeTabId      = useEditorStore((s) => s.activeTabId);
+  const theme            = useEditorStore((s) => s.theme);
   const updateTabContent = useEditorStore((s) => s.updateTabContent);
-  const markTabSaved = useEditorStore((s) => s.markTabSaved);
-  const showToast = useEditorStore((s) => s.showToast);
+  const markTabSaved     = useEditorStore((s) => s.markTabSaved);
+  const showToast        = useEditorStore((s) => s.showToast);
   const createUntitledTab = useEditorStore((s) => s.createUntitledTab);
 
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
@@ -19,7 +40,7 @@ export default function EditorPanel() {
 
   const handleSave = useCallback(async () => {
     const state = useEditorStore.getState();
-    const tab = state.tabs.find((t) => t.id === state.activeTabId);
+    const tab   = state.tabs.find((t) => t.id === state.activeTabId);
     if (!tab) return;
 
     try {
@@ -29,7 +50,6 @@ export default function EditorPanel() {
         showToast(`Saved ${tab.name}`, "success");
         return;
       }
-
       if (supportsFileSystemAccess) {
         const handle = await saveFileAs(tab.content, tab.name);
         if (handle) {
@@ -38,8 +58,6 @@ export default function EditorPanel() {
         }
         return;
       }
-
-      // Fallback: trigger a browser download.
       downloadFile(tab.content, tab.name === "Untitled" ? "untitled.txt" : tab.name);
       markTabSaved(tab.id);
       showToast(`Downloaded ${tab.name}`, "success");
@@ -57,20 +75,46 @@ export default function EditorPanel() {
     });
   };
 
+  /* ── Empty / welcome state ── */
   if (!activeTab) {
     return (
       <div className={styles.emptyEditor}>
         <div className={styles.emptyContent}>
-          <h1>Code Editor</h1>
-          <p>Open a folder or file to start editing, or create a new file.</p>
+          {/* Tidal Halo — primary mark */}
+          <div className={styles.emptyMark}>
+            <TidalHaloLarge />
+          </div>
+
+          <h1>abyssal liturgy</h1>
+          <p>Open a folder or file to begin, or create a new untitled document.</p>
+
+          {/* Keyboard hints */}
+          <div className={styles.keyHints}>
+            <div className={styles.keyHint}>
+              <kbd>⌘ O</kbd>
+              <span>Open file</span>
+            </div>
+            <div className={styles.keyHint}>
+              <kbd>⌘ S</kbd>
+              <span>Save to disk</span>
+            </div>
+            <div className={styles.keyHint}>
+              <kbd>⌘ ⇧ S</kbd>
+              <span>Save as</span>
+            </div>
+          </div>
+
+          <div className={styles.emptyDivider} />
+
           <button className={styles.newFileBtn} onClick={createUntitledTab}>
-            New File
+            New file
           </button>
         </div>
       </div>
     );
   }
 
+  /* ── Active editor ── */
   return (
     <div className={styles.editorWrapper}>
       <Editor
@@ -82,18 +126,29 @@ export default function EditorPanel() {
         onChange={(value) => updateTabContent(activeTab.id, value ?? "")}
         onMount={handleMount}
         options={{
-          fontSize: 14,
-          fontFamily: "SF Mono, Monaco, Cascadia Code, Fira Code, Consolas, monospace",
+          fontSize: 13,
+          fontFamily: "'JetBrains Mono', 'Cascadia Code', 'Fira Code', Consolas, monospace",
+          fontWeight: "300",
           fontLigatures: true,
-          minimap: { enabled: true },
+          lineHeight: 1.8,
+          letterSpacing: 0.2,
+          minimap: { enabled: true, scale: 1, renderCharacters: false },
           smoothScrolling: true,
           cursorBlinking: "smooth",
           cursorSmoothCaretAnimation: "on",
+          cursorStyle: "line",
+          cursorWidth: 1,
           renderWhitespace: "selection",
           bracketPairColorization: { enabled: true },
-          padding: { top: 12 },
+          padding: { top: 20, bottom: 20 },
           scrollBeyondLastLine: false,
           automaticLayout: true,
+          lineNumbers: "on",
+          renderLineHighlight: "gutter",
+          scrollbar: {
+            verticalScrollbarSize: 6,
+            horizontalScrollbarSize: 6,
+          },
         }}
       />
     </div>

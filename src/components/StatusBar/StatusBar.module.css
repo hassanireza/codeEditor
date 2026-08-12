@@ -1,21 +1,69 @@
+/* ── StatusBar ─────────────────────────────────────────────
+   Bottom chrome. Mono labels only. Deep Charcoal background.
+   No accent color fill — unlike VS Code's blue bar.
+   ─────────────────────────────────────────────────────── */
+
 .statusBar {
-  height: 24px;
-  background: var(--bg-statusbar);
-  color: white;
+  height: 22px;
+  background: var(--bg-3);
+  border-top: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 12px;
-  font-size: 12px;
+  padding: 0 14px;
   flex-shrink: 0;
+  position: relative;
 }
 
-.left, .right {
+/* Subtle top glow — the one allowed light source */
+.statusBar::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 207, 210, 0.06) 50%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+.left,
+.right {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
 }
 
 .item {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-4);
   white-space: nowrap;
+  transition: color 0.25s var(--ease);
+}
+
+.item:hover {
+  color: var(--text-3);
+  cursor: default;
+}
+
+/* Language item — slight emphasis */
+.item.language {
+  color: var(--text-3);
+}
+
+/* Separator dot */
+.item + .item::before {
+  content: "·";
+  margin-right: 16px;
+  color: var(--border-hover);
+  font-size: 0.6rem;
 }

@@ -1,35 +1,81 @@
+/* ── Toast ─────────────────────────────────────────────────
+   Non-intrusive notification. Bottom-right.
+   Near-monochrome — no saturated colors.
+   Slow, liturgy-eased entrance. Never bounces.
+   ─────────────────────────────────────────────────────── */
+
 .toast {
   position: fixed;
-  bottom: 34px;
-  right: 16px;
+  bottom: 36px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   padding: 10px 16px;
-  border-radius: 4px;
-  font-size: 13px;
-  color: white;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-hover);
+  background: var(--bg-3);
+  box-shadow: var(--shadow);
   z-index: 1000;
-  animation: slideIn 0.15s ease-out;
+  max-width: 320px;
+  animation: toastIn 0.45s var(--ease-liturgy) both;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
+/* Indicator strip — left edge, 1px */
+.toast::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  border-radius: 99px;
+}
+
+/* ── Variants ── */
 .info {
-  background: #3c3c3c;
+  color: var(--text-2);
+}
+.info::before {
+  background: var(--accent);
 }
 
 .success {
-  background: #14825a;
+  color: var(--text-2);
+}
+.success::before {
+  background: var(--accent-bright);
 }
 
 .error {
-  background: #a1260d;
+  color: var(--text-2);
+}
+.error::before {
+  background: var(--text-3);
 }
 
-@keyframes slideIn {
-  from {
-    transform: translateY(8px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+/* ── Text ── */
+.toastMessage {
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  color: inherit;
+  line-height: 1.5;
 }
+
+/* ── Dot indicator ── */
+.toastDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--accent-bright);
+  opacity: 0.7;
+}
+
+.info .toastDot    { background: var(--accent); }
+.success .toastDot { background: var(--accent-bright); }
+.error .toastDot   { background: var(--text-3); }

@@ -1,8 +1,14 @@
+/* ── App layout ────────────────────────────────────────────
+   Full-viewport, flex column. No decorative layout chrome.
+   Everything is void by default.
+   ─────────────────────────────────────────────────────── */
+
 .app {
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
+  background: var(--bg);
 }
 
 .body {
@@ -17,5 +23,6 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
-  background: var(--bg-editor-group);
+  background: var(--bg);
+  position: relative;
 }

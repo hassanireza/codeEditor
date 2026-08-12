@@ -1,44 +1,158 @@
+/* ── Editor Panel ──────────────────────────────────────────
+   The primary canvas. Void background, full bleed.
+   Empty state: editorial restraint — display italic,
+   mono label, single CTA button.
+   ─────────────────────────────────────────────────────── */
+
 .editorWrapper {
   flex: 1;
   overflow: hidden;
   min-width: 0;
+  position: relative;
+  background: var(--bg);
 }
 
+/* ── Empty / welcome state ── */
 .emptyEditor {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg-editor-group);
+  background: var(--bg);
+  animation: surface 1.1s var(--ease-liturgy) both;
+  position: relative;
+}
+
+/* Single soft radial glow — one light source rule */
+.emptyEditor::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 300px;
+  background: radial-gradient(
+    ellipse 60% 50% at 50% 0%,
+    rgba(124, 136, 145, 0.05),
+    transparent 70%
+  );
+  pointer-events: none;
 }
 
 .emptyContent {
   text-align: center;
-  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  position: relative;
+  z-index: 1;
 }
 
+/* Tidal Halo mark — quiet, centered */
+.emptyMark {
+  opacity: 0.18;
+  margin-bottom: 2.4rem;
+  animation: fadeUp 1.4s var(--ease-liturgy) 0.2s both;
+}
+
+/* Display headline — italic serif, weight 300 */
 .emptyContent h1 {
-  font-size: 22px;
+  font-family: var(--font-display);
+  font-style: italic;
   font-weight: 300;
-  color: var(--text-primary);
-  margin: 0 0 8px;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  color: var(--text);
+  margin: 0 0 0.9rem;
+  letter-spacing: -0.01em;
+  line-height: 0.95;
+  animation: fadeUp 1.2s var(--ease-liturgy) 0.3s both;
 }
 
 .emptyContent p {
-  font-size: 13px;
-  margin: 0 0 20px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: var(--text-3);
+  margin: 0 0 2.4rem;
+  line-height: 1.75;
+  max-width: 34ch;
+  animation: fadeUp 1.2s var(--ease-liturgy) 0.45s both;
 }
 
+/* Keyboard hint list */
+.keyHints {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2.8rem;
+  animation: fadeUp 1.2s var(--ease-liturgy) 0.55s both;
+}
+
+.keyHint {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  justify-content: center;
+}
+
+.keyHint kbd {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  border: 1px solid var(--border);
+  background: var(--bg-3);
+  color: var(--text-3);
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius);
+  white-space: nowrap;
+}
+
+.keyHint span {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-4);
+}
+
+/* Divider before CTA */
+.emptyDivider {
+  width: 40px;
+  height: 1px;
+  background: var(--border);
+  margin: 0 auto 2.4rem;
+  animation: fadeUp 1.2s var(--ease-liturgy) 0.6s both;
+}
+
+/* New file CTA — brand button spec */
 .newFileBtn {
-  background: var(--accent-soft);
-  color: white;
-  border: none;
-  padding: 8px 18px;
-  border-radius: 4px;
-  font-size: 13px;
-  font-weight: 500;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.7rem 1.8rem;
+  border: 1px solid var(--accent);
+  background: var(--accent-dim);
+  color: var(--text);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition:
+    background 0.35s var(--ease),
+    color 0.35s var(--ease),
+    border-color 0.35s var(--ease),
+    transform 0.2s var(--ease);
+  animation: fadeUp 1.2s var(--ease-liturgy) 0.7s both;
 }
 
 .newFileBtn:hover {
   background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
+.newFileBtn:active {
+  transform: scale(0.97);
 }
