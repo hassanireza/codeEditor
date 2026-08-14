@@ -1,253 +1,321 @@
-<svg viewBox="0 0 1200 320" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', system-ui, -apple-system, sans-serif">
+<svg viewBox="0 0 1200 340" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Background gradient: deep dark to slightly lighter -->
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0d1117;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#161b22;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#1c2128;stop-opacity:1" />
+    <!-- Void background -->
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#08090b"/>
+      <stop offset="100%" stop-color="#0d1013"/>
     </linearGradient>
-    <!-- Accent glow -->
-    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#646CFF;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#61DAFB;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#3178C6;stop-opacity:1" />
+
+    <!-- Silver accent gradient for lines / hairlines -->
+    <linearGradient id="silverLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#08090b" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#7c8891" stop-opacity="0.6"/>
+      <stop offset="70%" stop-color="#c9cfd2" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#08090b" stop-opacity="0"/>
     </linearGradient>
-    <!-- Editor window gradient -->
-    <linearGradient id="windowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#1e2228;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#161b22;stop-opacity:1" />
-    </linearGradient>
-    <!-- Glow filter for accent bar -->
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+
+    <!-- Glow halo behind logo bolt -->
+    <radialGradient id="boltGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#863bff" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#863bff" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Ambient left glow -->
+    <radialGradient id="leftGlow" cx="0%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#7e14ff" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#7e14ff" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Ambient right glow -->
+    <radialGradient id="rightGlow" cx="100%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#47bfff" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#47bfff" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Noise texture filter -->
+    <filter id="noise" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch" result="noiseOut"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.55  0 0 0 0 0.58  0 0 0 0 0.6  0 0 0 0.5 0" in="noiseOut" result="colorNoise"/>
+      <feBlend in="SourceGraphic" in2="colorNoise" mode="overlay" result="blended"/>
+      <feComposite in="blended" in2="SourceGraphic" operator="in"/>
     </filter>
-    <!-- Grid pattern -->
-    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-width="0.15" opacity="0.08"/>
-    </pattern>
+
+    <!-- Glow blur for bolt -->
+    <filter id="boltBlur" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="12"/>
+    </filter>
+
+    <!-- Subtle code panel shadow -->
+    <filter id="panelShadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="0" dy="4" stdDeviation="16" flood-color="#000000" flood-opacity="0.7"/>
+    </filter>
+
+    <!-- Clip for rounded banner -->
+    <clipPath id="bannerClip">
+      <rect width="1200" height="340" rx="0"/>
+    </clipPath>
   </defs>
 
-  <!-- Background -->
-  <rect width="1200" height="320" fill="url(#bgGrad)" rx="12"/>
-  <!-- Subtle grid overlay -->
-  <rect width="1200" height="320" fill="url(#grid)" rx="12"/>
+  <g clip-path="url(#bannerClip)">
+    <!-- Base void -->
+    <rect width="1200" height="340" fill="url(#bg)"/>
 
-  <!-- Decorative glow circle top-left -->
-  <ellipse cx="80" cy="60" rx="120" ry="120" fill="#646CFF" opacity="0.06"/>
-  <!-- Decorative glow circle bottom-right -->
-  <ellipse cx="1150" cy="280" rx="150" ry="150" fill="#61DAFB" opacity="0.05"/>
-  <!-- Mid accent -->
-  <ellipse cx="600" cy="320" rx="300" ry="100" fill="#3178C6" opacity="0.04"/>
+    <!-- Noise overlay -->
+    <rect width="1200" height="340" fill="#9aa3a8" opacity="0.025" filter="url(#noise)"/>
 
-  <!-- Top accent bar (gradient line) -->
-  <rect x="0" y="0" width="1200" height="3" fill="url(#accentGrad)" rx="12" filter="url(#glow)"/>
+    <!-- Ambient glows -->
+    <rect width="1200" height="340" fill="url(#leftGlow)"/>
+    <rect width="1200" height="340" fill="url(#rightGlow)"/>
 
-  <!-- ── LEFT SIDE: Text content ── -->
+    <!-- Top hairline -->
+    <rect x="0" y="0" width="1200" height="1" fill="url(#silverLine)" opacity="0.8"/>
 
-  <!-- App icon circle -->
-  <circle cx="90" cy="130" r="38" fill="#1e2228" stroke="#646CFF" stroke-width="1.5" opacity="0.9"/>
-  <!-- VS Code-ish icon inside circle -->
-  <path d="M76 118 L88 128 L76 138 L70 134 L80 128 L70 122 Z" fill="#61DAFB"/>
-  <path d="M90 118 L102 108 L108 112 L95 128 L108 144 L102 148 L90 138 L84 128 Z" fill="#646CFF"/>
+    <!-- Bottom hairline -->
+    <rect x="0" y="339" width="1200" height="1" fill="url(#silverLine)" opacity="0.4"/>
 
-  <!-- Headline -->
-  <text x="148" y="115" font-size="38" font-weight="700" letter-spacing="-0.5" fill="#ffffff">Code Editor</text>
-  <!-- Gradient underline for headline -->
-  <rect x="148" y="122" width="310" height="2.5" fill="url(#accentGrad)" rx="2"/>
+    <!-- Vertical separator between left text and right code panel -->
+    <line x1="500" y1="40" x2="500" y2="300" stroke="#7c8891" stroke-width="0.5" opacity="0.18"/>
 
-  <!-- Tagline -->
-  <text x="148" y="152" font-size="15" fill="#8b949e" letter-spacing="0.2">VS Code–inspired · Browser-based · Zero backend</text>
+    <!-- ══ LEFT: Identity block ══ -->
 
-  <!-- Feature pills row 1 -->
-  <!-- Monaco -->
-  <rect x="148" y="172" width="114" height="26" rx="13" fill="#21262d" stroke="#30363d" stroke-width="1"/>
-  <circle cx="168" cy="185" r="6" fill="#68217A"/>
-  <text x="180" y="190" font-size="12" fill="#c9d1d9">Monaco Editor</text>
+    <!-- Bolt glow halo -->
+    <ellipse cx="96" cy="120" rx="54" ry="54" fill="url(#boltGlow)" filter="url(#boltBlur)"/>
 
-  <!-- TypeScript -->
-  <rect x="272" y="172" width="102" height="26" rx="13" fill="#21262d" stroke="#30363d" stroke-width="1"/>
-  <rect x="282" y="178" width="14" height="14" rx="2" fill="#3178C6"/>
-  <text x="285" y="189" font-size="9" font-weight="700" fill="#fff">TS</text>
-  <text x="302" y="190" font-size="12" fill="#c9d1d9">TypeScript</text>
+    <!-- Favicon bolt — copied & scaled from favicon.svg, purple #863bff -->
+    <g transform="translate(66, 94) scale(1.15)">
+      <path fill="#863bff" d="M25.946 44.938c-.664.845-2.021.375-2.021-.698V33.937a2.26 2.26 0 0 0-2.262-2.262H10.287c-.92 0-1.456-1.04-.92-1.788l7.48-10.471c1.07-1.497 0-3.578-1.842-3.578H1.237c-.92 0-1.456-1.04-.92-1.788L10.013.474c.214-.297.556-.474.92-.474h28.894c.92 0 1.456 1.04.92 1.788l-7.48 10.471c-1.07 1.498 0 3.579 1.842 3.579h11.377c.943 0 1.473 1.088.89 1.83L25.947 44.94z"/>
+      <!-- inner light streak -->
+      <ellipse cx="28" cy="12" rx="6" ry="14" fill="#ede6ff" opacity="0.18" transform="rotate(-8 28 12)"/>
+    </g>
 
-  <!-- React -->
-  <rect x="384" y="172" width="82" height="26" rx="13" fill="#21262d" stroke="#30363d" stroke-width="1"/>
-  <circle cx="399" cy="185" r="6" fill="none" stroke="#61DAFB" stroke-width="1.5"/>
-  <circle cx="399" cy="185" r="2" fill="#61DAFB"/>
-  <text x="411" y="190" font-size="12" fill="#c9d1d9">React 19</text>
+    <!-- Project name — Cormorant Garamond display -->
+    <text x="148" y="116" font-family="'Cormorant Garamond', 'EB Garamond', Georgia, serif" font-size="38" font-weight="300" fill="#e6e3da" letter-spacing="1.5">Abyssal Liturgy</text>
 
-  <!-- Feature pills row 2 -->
-  <!-- FSAA -->
-  <rect x="148" y="208" width="134" height="26" rx="13" fill="#21262d" stroke="#30363d" stroke-width="1"/>
-  <text x="168" y="226" font-size="16" fill="#F59E0B">📁</text>
-  <text x="191" y="226" font-size="12" fill="#c9d1d9">Real File Access</text>
+    <!-- Subtitle eyebrow -->
+    <text x="149" y="137" font-family="'Jost', 'DM Sans', system-ui, sans-serif" font-size="11" font-weight="300" fill="#7c8891" letter-spacing="4" text-transform="uppercase">CODE EDITOR</text>
 
-  <!-- Auto-detect -->
-  <rect x="292" y="208" width="120" height="26" rx="13" fill="#21262d" stroke="#30363d" stroke-width="1"/>
-  <text x="308" y="226" font-size="16" fill="#22C55E">🔍</text>
-  <text x="331" y="226" font-size="12" fill="#c9d1d9">Auto Language</text>
+    <!-- Horizontal rule under name -->
+    <line x1="148" y1="147" x2="468" y2="147" stroke="#7c8891" stroke-width="0.5" opacity="0.3"/>
 
-  <!-- Multi-tab -->
-  <rect x="422" y="208" width="94" height="26" rx="13" fill="#21262d" stroke="#30363d" stroke-width="1"/>
-  <text x="438" y="226" font-size="16" fill="#61DAFB">🗂</text>
-  <text x="459" y="226" font-size="12" fill="#c9d1d9">Multi-Tab</text>
+    <!-- Tagline -->
+    <text x="149" y="174" font-family="'Jost', 'DM Sans', system-ui, sans-serif" font-size="14" font-weight="300" fill="#9aa3a8" letter-spacing="0.3">VS Code-inspired. Zero backend.</text>
+    <text x="149" y="193" font-family="'Jost', 'DM Sans', system-ui, sans-serif" font-size="14" font-weight="300" fill="#9aa3a8" letter-spacing="0.3">Monaco power. Real file system access.</text>
 
-  <!-- Quick start commands -->
-  <rect x="148" y="248" width="340" height="48" rx="8" fill="#0d1117" stroke="#21262d" stroke-width="1"/>
-  <text x="168" y="269" font-size="12" fill="#8b949e" font-family="monospace">$</text>
-  <text x="181" y="269" font-size="12" fill="#22C55E" font-family="monospace">npm install</text>
-  <text x="168" y="287" font-size="12" fill="#8b949e" font-family="monospace">$</text>
-  <text x="181" y="287" font-size="12" fill="#22C55E" font-family="monospace">npm run dev</text>
+    <!-- Stack pills row -->
+    <!-- React pill -->
+    <g transform="translate(148, 216)">
+      <rect width="66" height="22" rx="2" fill="#0d1013" stroke="#7c8891" stroke-width="0.5" stroke-opacity="0.4"/>
+      <circle cx="12" cy="11" r="4.5" fill="none" stroke="#61DAFB" stroke-width="1.2"/>
+      <circle cx="12" cy="11" r="1.2" fill="#61DAFB"/>
+      <text x="22" y="15.5" font-family="'Jost', system-ui, sans-serif" font-size="9.5" font-weight="400" fill="#9aa3a8" letter-spacing="0.5">React 19</text>
+    </g>
+    <!-- TypeScript pill -->
+    <g transform="translate(222, 216)">
+      <rect width="84" height="22" rx="2" fill="#0d1013" stroke="#7c8891" stroke-width="0.5" stroke-opacity="0.4"/>
+      <rect x="5" y="5" width="12" height="12" rx="1.5" fill="#3178C6"/>
+      <text x="7.5" y="15" font-family="'JetBrains Mono', Consolas, monospace" font-size="7.5" font-weight="700" fill="#fff">TS</text>
+      <text x="22" y="15.5" font-family="'Jost', system-ui, sans-serif" font-size="9.5" font-weight="400" fill="#9aa3a8" letter-spacing="0.5">TypeScript 6</text>
+    </g>
+    <!-- Vite pill -->
+    <g transform="translate(314, 216)">
+      <rect width="57" height="22" rx="2" fill="#0d1013" stroke="#7c8891" stroke-width="0.5" stroke-opacity="0.4"/>
+      <text x="9" y="15" font-family="'JetBrains Mono', Consolas, monospace" font-size="10" fill="#646CFF">⚡</text>
+      <text x="22" y="15.5" font-family="'Jost', system-ui, sans-serif" font-size="9.5" font-weight="400" fill="#9aa3a8" letter-spacing="0.5">Vite 8</text>
+    </g>
+    <!-- Zustand pill -->
+    <g transform="translate(379, 216)">
+      <rect width="72" height="22" rx="2" fill="#0d1013" stroke="#7c8891" stroke-width="0.5" stroke-opacity="0.4"/>
+      <text x="9" y="15" font-family="'JetBrains Mono', Consolas, monospace" font-size="10" fill="#FF4154">Z</text>
+      <text x="22" y="15.5" font-family="'Jost', system-ui, sans-serif" font-size="9.5" font-weight="400" fill="#9aa3a8" letter-spacing="0.5">Zustand 5</text>
+    </g>
 
-  <!-- ── RIGHT SIDE: Mini editor window mockup ── -->
+    <!-- Monaco pill — second row -->
+    <g transform="translate(148, 246)">
+      <rect width="130" height="22" rx="2" fill="#0d1013" stroke="#7c8891" stroke-width="0.5" stroke-opacity="0.4"/>
+      <rect x="5" y="5" width="12" height="12" rx="1.5" fill="#68217A"/>
+      <text x="7" y="14.5" font-family="'JetBrains Mono', Consolas, monospace" font-size="6.5" font-weight="700" fill="#c9cfd2">M</text>
+      <text x="22" y="15.5" font-family="'Jost', system-ui, sans-serif" font-size="9.5" font-weight="400" fill="#9aa3a8" letter-spacing="0.5">Monaco Editor 0.55</text>
+    </g>
+    <!-- oxlint pill -->
+    <g transform="translate(286, 246)">
+      <rect width="60" height="22" rx="2" fill="#0d1013" stroke="#7c8891" stroke-width="0.5" stroke-opacity="0.4"/>
+      <text x="9" y="15" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#e6e3da">ox</text>
+      <text x="23" y="15.5" font-family="'Jost', system-ui, sans-serif" font-size="9.5" font-weight="400" fill="#9aa3a8" letter-spacing="0.5">lint</text>
+    </g>
+    <!-- MIT pill -->
+    <g transform="translate(354, 246)">
+      <rect width="50" height="22" rx="2" fill="#0d1013" stroke="#7c8891" stroke-width="0.5" stroke-opacity="0.4"/>
+      <text x="10" y="15.5" font-family="'Jost', system-ui, sans-serif" font-size="9.5" font-weight="300" fill="#7c8891" letter-spacing="1">MIT</text>
+    </g>
 
-  <!-- Editor window outer shadow/glow -->
-  <rect x="570" y="28" width="610" height="264" rx="10" fill="#646CFF" opacity="0.08"/>
+    <!-- ══ RIGHT: Code editor mock-up ══ -->
+    <g transform="translate(524, 28)" filter="url(#panelShadow)">
+      <!-- Editor chrome -->
+      <rect width="642" height="284" rx="3" fill="#0d1013" stroke="#7c8891" stroke-width="0.5" stroke-opacity="0.2"/>
 
-  <!-- Editor window frame -->
-  <rect x="568" y="26" width="610" height="264" rx="10" fill="url(#windowGrad)" stroke="#30363d" stroke-width="1"/>
+      <!-- Title bar -->
+      <rect width="642" height="30" rx="3" fill="#12161a"/>
+      <rect x="0" y="27" width="642" height="1" fill="#7c8891" opacity="0.12"/>
+      <!-- Traffic lights -->
+      <circle cx="16" cy="15" r="5" fill="#4d5560" opacity="0.7"/>
+      <circle cx="32" cy="15" r="5" fill="#4d5560" opacity="0.7"/>
+      <circle cx="48" cy="15" r="5" fill="#4d5560" opacity="0.7"/>
+      <!-- Title -->
+      <text x="321" y="19.5" font-family="'Jost', system-ui, sans-serif" font-size="10" font-weight="300" fill="#7f8589" text-anchor="middle" letter-spacing="0.5">Abyssal Liturgy — Code Editor</text>
 
-  <!-- Title bar -->
-  <rect x="568" y="26" width="610" height="30" rx="10" fill="#1c2128"/>
-  <rect x="568" y="44" width="610" height="12" fill="#1c2128"/>
+      <!-- Tab bar -->
+      <rect x="0" y="30" width="642" height="28" fill="#0d1013"/>
+      <rect x="0" y="57" width="642" height="1" fill="#7c8891" opacity="0.1"/>
+      <!-- Active tab -->
+      <rect x="0" y="30" width="130" height="28" fill="#08090b"/>
+      <rect x="0" y="30" width="130" height="1" fill="#863bff" opacity="0.7"/>
+      <text x="14" y="48" font-family="'JetBrains Mono', Consolas, monospace" font-size="10" fill="#e6e3da">App.tsx</text>
+      <!-- dot dirty indicator -->
+      <circle cx="108" cy="44" r="3" fill="#c9cfd2" opacity="0.5"/>
+      <!-- inactive tab -->
+      <rect x="130" y="30" width="110" height="28" fill="#0d1013"/>
+      <text x="144" y="48" font-family="'JetBrains Mono', Consolas, monospace" font-size="10" fill="#4d5560">fileSystem.ts</text>
 
-  <!-- Traffic lights -->
-  <circle cx="592" cy="41" r="6" fill="#FF5F57"/>
-  <circle cx="612" cy="41" r="6" fill="#FEBC2E"/>
-  <circle cx="632" cy="41" r="6" fill="#28C840"/>
+      <!-- Activity bar strip -->
+      <rect x="0" y="58" width="40" height="226" fill="#0d1013" opacity="0.7"/>
+      <rect x="39" y="58" width="1" fill="#7c8891" height="226" opacity="0.1"/>
 
-  <!-- Title bar text -->
-  <text x="660" y="46" font-size="12" fill="#8b949e" text-anchor="middle" font-family="monospace">● App.tsx</text>
-  <text x="730" y="46" font-size="12" fill="#6e7681" text-anchor="middle" font-family="monospace">useEditorStore.ts</text>
-  <text x="820" y="46" font-size="12" fill="#6e7681" text-anchor="middle" font-family="monospace">fileSystem.ts</text>
+      <!-- Activity bar icons (simplified) -->
+      <!-- Explorer icon -->
+      <rect x="12" y="74" width="16" height="3" rx="0.5" fill="#7c8891" opacity="0.6"/>
+      <rect x="12" y="80" width="16" height="3" rx="0.5" fill="#7c8891" opacity="0.4"/>
+      <rect x="12" y="86" width="10" height="3" rx="0.5" fill="#7c8891" opacity="0.3"/>
+      <!-- Theme icon -->
+      <circle cx="20" cy="120" r="7" fill="none" stroke="#7c8891" stroke-width="1.2" opacity="0.4"/>
+      <path d="M 20 113 A 7 7 0 0 1 20 127 Z" fill="#7c8891" opacity="0.3"/>
 
-  <!-- Activity bar strip (narrow left) -->
-  <rect x="568" y="56" width="36" height="234" rx="0" fill="#1c2128"/>
-  <!-- Activity bar icons -->
-  <text x="578" y="80" font-size="16">📁</text>
-  <text x="578" y="110" font-size="16">🔍</text>
-  <text x="578" y="140" font-size="16">⚙️</text>
-  <text x="578" y="268" font-size="16">🌗</text>
+      <!-- Sidebar -->
+      <rect x="40" y="58" width="140" height="226" fill="#0d1013"/>
+      <rect x="179" y="58" width="1" height="226" fill="#7c8891" opacity="0.08"/>
 
-  <!-- Sidebar (file tree) -->
-  <rect x="604" y="56" width="140" height="234" fill="#161b22"/>
-  <!-- Sidebar header -->
-  <text x="614" y="74" font-size="10" fill="#6e7681" font-weight="600" letter-spacing="1">EXPLORER</text>
-  <!-- File tree items -->
-  <text x="614" y="93" font-size="11" fill="#8b949e" font-family="monospace">📂 src</text>
-  <text x="624" y="109" font-size="11" fill="#8b949e" font-family="monospace">📂 components</text>
-  <text x="634" y="125" font-size="11" fill="#8b949e" font-family="monospace">📂 Editor</text>
-  <text x="644" y="141" font-size="11" fill="#c9d1d9" font-family="monospace">🔷 EditorPanel.tsx</text>
-  <text x="634" y="157" font-size="11" fill="#8b949e" font-family="monospace">📂 Sidebar</text>
-  <text x="644" y="173" font-size="11" fill="#8b949e" font-family="monospace">🔷 Sidebar.tsx</text>
-  <text x="634" y="189" font-size="11" fill="#8b949e" font-family="monospace">📂 Tabs</text>
-  <text x="624" y="205" font-size="11" fill="#8b949e" font-family="monospace">📂 lib</text>
-  <text x="634" y="221" font-size="11" fill="#8b949e" font-family="monospace">📄 fileSystem.ts</text>
-  <text x="634" y="237" font-size="11" fill="#8b949e" font-family="monospace">📄 languageDetect.ts</text>
-  <text x="624" y="253" font-size="11" fill="#8b949e" font-family="monospace">📂 store</text>
-  <text x="634" y="269" font-size="11" fill="#8b949e" font-family="monospace">🔷 useEditorStore.ts</text>
+      <!-- Sidebar header -->
+      <text x="52" y="76" font-family="'Jost', system-ui, sans-serif" font-size="8.5" font-weight="400" fill="#7f8589" letter-spacing="1.5">EXPLORER</text>
 
-  <!-- Highlight selected file -->
-  <rect x="604" y="130" width="140" height="16" fill="#264F78" opacity="0.6" rx="2"/>
+      <!-- File tree -->
+      <text x="52" y="96" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#7f8589">▾ src</text>
+      <text x="62" y="110" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#7f8589">▾ components</text>
+      <text x="72" y="124" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#7c8891">▸ Editor</text>
+      <text x="72" y="138" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#7c8891">▸ Sidebar</text>
+      <text x="72" y="152" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#7c8891">▸ Tabs</text>
+      <text x="62" y="166" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#7c8891">▸ lib</text>
+      <text x="62" y="180" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#7c8891">▸ store</text>
 
-  <!-- Editor code area -->
-  <rect x="744" y="56" width="434" height="234" fill="#1e2228"/>
+      <!-- Active file highlight -->
+      <rect x="40" y="87" width="140" height="14" fill="#7c8891" opacity="0.06"/>
+      <text x="52" y="98" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#e6e3da">▾ src</text>
 
-  <!-- Line numbers column -->
-  <rect x="744" y="56" width="34" height="234" fill="#1c2128"/>
+      <!-- Code area -->
+      <rect x="180" y="58" width="462" height="226" fill="#08090b"/>
 
-  <!-- Line numbers -->
-  <text x="755" y="78" font-size="10" fill="#4d5566" font-family="monospace" text-anchor="middle">1</text>
-  <text x="755" y="94" font-size="10" fill="#4d5566" font-family="monospace" text-anchor="middle">2</text>
-  <text x="755" y="110" font-size="10" fill="#4d5566" font-family="monospace" text-anchor="middle">3</text>
-  <text x="755" y="126" font-size="10" fill="#4d5566" font-family="monospace" text-anchor="middle">4</text>
-  <text x="755" y="142" font-size="10" fill="#4d5566" font-family="monospace" text-anchor="middle">5</text>
-  <text x="755" y="158" font-size="10" fill="#4d5566" font-family="monospace" text-anchor="middle">6</text>
-  <text x="755" y="174" font-size="10" fill="#c9d1d9" font-family="monospace" text-anchor="middle">7</text>
-  <text x="755" y="190" font-size="10" fill="#4d5566" font-family="monospace" text-anchor="middle">8</text>
-  <text x="755" y="206" font-size="10" fill="#4d5566" font-family="monospace" text-anchor="middle">9</text>
-  <text x="755" y="222" font-size="10" fill="#4d5566" font-family="monospace" text-anchor="middle">10</text>
-  <text x="755" y="238" font-size="10" fill="#4d5566" font-family="monospace" text-anchor="middle">11</text>
-  <text x="755" y="254" font-size="10" fill="#4d5566" font-family="monospace" text-anchor="middle">12</text>
-  <text x="755" y="270" font-size="10" fill="#4d5566" font-family="monospace" text-anchor="middle">13</text>
+      <!-- Line numbers -->
+      <rect x="180" y="58" width="32" height="226" fill="#08090b"/>
+      <text x="202" y="78" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#4d5560" text-anchor="end">1</text>
+      <text x="202" y="92" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#4d5560" text-anchor="end">2</text>
+      <text x="202" y="106" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#4d5560" text-anchor="end">3</text>
+      <text x="202" y="120" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#7c8891" text-anchor="end">4</text>
+      <text x="202" y="134" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#4d5560" text-anchor="end">5</text>
+      <text x="202" y="148" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#4d5560" text-anchor="end">6</text>
+      <text x="202" y="162" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#4d5560" text-anchor="end">7</text>
+      <text x="202" y="176" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#4d5560" text-anchor="end">8</text>
+      <text x="202" y="190" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#4d5560" text-anchor="end">9</text>
+      <text x="202" y="204" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#4d5560" text-anchor="end">10</text>
+      <text x="202" y="218" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#4d5560" text-anchor="end">11</text>
+      <text x="202" y="232" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#4d5560" text-anchor="end">12</text>
+      <text x="202" y="246" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#4d5560" text-anchor="end">13</text>
+      <text x="202" y="260" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#4d5560" text-anchor="end">14</text>
 
-  <!-- Code syntax highlight (EditorPanel.tsx mockup) -->
-  <!-- Line 1: import -->
-  <text x="786" y="78" font-size="10.5" fill="#C586C0" font-family="'Cascadia Code', 'Fira Code', monospace">import</text>
-  <text x="826" y="78" font-size="10.5" fill="#c9d1d9" font-family="monospace"> { </text>
-  <text x="843" y="78" font-size="10.5" fill="#9CDCFE" font-family="monospace">useEditorStore</text>
-  <text x="941" y="78" font-size="10.5" fill="#c9d1d9" font-family="monospace"> } </text>
-  <text x="956" y="78" font-size="10.5" fill="#C586C0" font-family="monospace">from</text>
+      <!-- Active line highlight -->
+      <rect x="212" y="112" width="430" height="13" fill="#7c8891" opacity="0.06"/>
 
-  <!-- Line 2 -->
-  <text x="786" y="94" font-size="10.5" fill="#ce9178" font-family="monospace">  '../../store/useEditorStore'</text>
+      <!-- Code lines — colors from Monaco dark + Abyssal palette -->
+      <!-- Line 1: import -->
+      <text x="216" y="78" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#7c8891">import</text>
+      <text x="249" y="78" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#e6e3da"> { useEditorStore } </text>
+      <text x="370" y="78" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#7c8891">from</text>
+      <text x="392" y="78" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#c9cfd2"> '../store'</text>
 
-  <!-- Line 3: blank -->
+      <!-- Line 2: blank -->
 
-  <!-- Line 4: function -->
-  <text x="786" y="126" font-size="10.5" fill="#C586C0" font-family="monospace">export default function </text>
-  <text x="948" y="126" font-size="10.5" fill="#DCDCAA" font-family="monospace">EditorPanel</text>
-  <text x="1009" y="126" font-size="10.5" fill="#c9d1d9" font-family="monospace">() {</text>
+      <!-- Line 3: const -->
+      <text x="216" y="106" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#9aa3a8">export default </text>
+      <text x="307" y="106" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#7c8891">function</text>
+      <text x="348" y="106" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#c9cfd2"> EditorPanel</text>
+      <text x="415" y="106" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#e6e3da">() {</text>
 
-  <!-- Line 5: const -->
-  <text x="786" y="142" font-size="10.5" fill="#c9d1d9" font-family="monospace">  </text>
-  <text x="796" y="142" font-size="10.5" fill="#569CD6" font-family="monospace">const</text>
-  <text x="824" y="142" font-size="10.5" fill="#9CDCFE" font-family="monospace"> activeTab</text>
-  <text x="887" y="142" font-size="10.5" fill="#c9d1d9" font-family="monospace"> = </text>
-  <text x="905" y="142" font-size="10.5" fill="#DCDCAA" font-family="monospace">useEditorStore</text>
+      <!-- Line 4 (active): const -->
+      <text x="216" y="120" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#7c8891">  const</text>
+      <text x="247" y="120" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#e6e3da"> { activeTab, theme } </text>
+      <text x="353" y="120" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#7c8891">=</text>
+      <text x="361" y="120" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#c9cfd2"> useEditorStore()</text>
+      <!-- Cursor -->
+      <rect x="467" y="111" width="1.5" height="11" fill="#e6e3da" opacity="0.85"/>
 
-  <!-- Cursor line highlight -->
-  <rect x="778" y="164" width="390" height="14" fill="#264F78" opacity="0.3"/>
-  <!-- Line 7: active line -->
-  <text x="786" y="174" font-size="10.5" fill="#c9d1d9" font-family="monospace">    (s) </text>
-  <text x="824" y="174" font-size="10.5" fill="#c9d1d9" font-family="monospace">=&gt; </text>
-  <text x="847" y="174" font-size="10.5" fill="#9CDCFE" font-family="monospace">s</text>
-  <text x="853" y="174" font-size="10.5" fill="#c9d1d9" font-family="monospace">.</text>
-  <text x="858" y="174" font-size="10.5" fill="#9CDCFE" font-family="monospace">tabs</text>
-  <text x="882" y="174" font-size="10.5" fill="#c9d1d9" font-family="monospace">.</text>
-  <text x="887" y="174" font-size="10.5" fill="#DCDCAA" font-family="monospace">find</text>
-  <text x="910" y="174" font-size="10.5" fill="#c9d1d9" font-family="monospace">(t =&gt; t.</text>
-  <text x="957" y="174" font-size="10.5" fill="#9CDCFE" font-family="monospace">id</text>
-  <!-- Blinking cursor -->
-  <rect x="980" y="163" width="2" height="13" fill="#c9d1d9" opacity="0.9"/>
+      <!-- Line 5 -->
+      <text x="216" y="134" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#4d5560">  </text>
 
-  <!-- Lines 8-13: more code -->
-  <text x="786" y="190" font-size="10.5" fill="#c9d1d9" font-family="monospace">      === </text>
-  <text x="843" y="190" font-size="10.5" fill="#9CDCFE" font-family="monospace">s.activeTabId</text>
-  <text x="940" y="190" font-size="10.5" fill="#c9d1d9" font-family="monospace">);</text>
+      <!-- Line 6: return -->
+      <text x="216" y="148" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#7c8891">  return</text>
+      <text x="255" y="148" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#e6e3da"> (</text>
 
-  <text x="786" y="206" font-size="10.5" fill="#c9d1d9" font-family="monospace"></text>
+      <!-- Line 7: JSX -->
+      <text x="216" y="162" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#e6e3da">    &lt;</text>
+      <text x="230" y="162" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#9aa3a8">Editor</text>
+      <text x="266" y="162" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#7c8891"> theme</text>
+      <text x="295" y="162" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#e6e3da">={</text>
+      <text x="309" y="162" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#c9cfd2">theme</text>
+      <text x="335" y="162" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#e6e3da">}</text>
 
-  <text x="786" y="222" font-size="10.5" fill="#c9d1d9" font-family="monospace">  </text>
-  <text x="796" y="222" font-size="10.5" fill="#C586C0" font-family="monospace">return</text>
-  <text x="832" y="222" font-size="10.5" fill="#c9d1d9" font-family="monospace"> (</text>
+      <!-- Line 8: JSX continued -->
+      <text x="216" y="176" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#7c8891">          language</text>
+      <text x="294" y="176" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#e6e3da">={</text>
+      <text x="308" y="176" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#c9cfd2">activeTab?.lang</text>
+      <text x="390" y="176" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#e6e3da">}</text>
 
-  <text x="786" y="238" font-size="10.5" fill="#4EC9B0" font-family="monospace">    &lt;Editor</text>
+      <!-- Line 9: onSave handler -->
+      <text x="216" y="190" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#7c8891">          onSave</text>
+      <text x="274" y="190" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#e6e3da">={</text>
+      <text x="288" y="190" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#9aa3a8">handleSave</text>
+      <text x="337" y="190" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#e6e3da">}</text>
 
-  <text x="786" y="254" font-size="10.5" fill="#9CDCFE" font-family="monospace">      language</text>
-  <text x="858" y="254" font-size="10.5" fill="#c9d1d9" font-family="monospace">={</text>
-  <text x="872" y="254" font-size="10.5" fill="#9CDCFE" font-family="monospace">activeTab</text>
-  <text x="923" y="254" font-size="10.5" fill="#c9d1d9" font-family="monospace">?.</text>
-  <text x="934" y="254" font-size="10.5" fill="#9CDCFE" font-family="monospace">language</text>
-  <text x="991" y="254" font-size="10.5" fill="#c9d1d9" font-family="monospace">}</text>
+      <!-- Line 10: close -->
+      <text x="216" y="204" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#e6e3da">    /&gt;</text>
 
-  <text x="786" y="270" font-size="10.5" fill="#9CDCFE" font-family="monospace">      value</text>
-  <text x="838" y="270" font-size="10.5" fill="#c9d1d9" font-family="monospace">={</text>
-  <text x="852" y="270" font-size="10.5" fill="#9CDCFE" font-family="monospace">activeTab</text>
-  <text x="903" y="270" font-size="10.5" fill="#c9d1d9" font-family="monospace">?.</text>
-  <text x="914" y="270" font-size="10.5" fill="#9CDCFE" font-family="monospace">content</text>
-  <text x="963" y="270" font-size="10.5" fill="#c9d1d9" font-family="monospace">}</text>
+      <!-- Line 11 -->
+      <text x="216" y="218" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#e6e3da">  )</text>
 
-  <!-- Status bar -->
-  <rect x="568" y="278" width="610" height="12" rx="0" fill="#646CFF" opacity="0.8"/>
-  <text x="578" y="288" font-size="9" fill="#ffffff" font-family="monospace" opacity="0.9">main</text>
-  <text x="750" y="288" font-size="9" fill="#ffffff" font-family="monospace" opacity="0.9" text-anchor="middle">TypeScript React</text>
-  <text x="1148" y="288" font-size="9" fill="#ffffff" font-family="monospace" opacity="0.9" text-anchor="end">Ln 7, Col 22</text>
+      <!-- Line 12 -->
+      <text x="216" y="232" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#e6e3da">}</text>
 
-  <!-- Bottom accent line -->
-  <rect x="0" y="317" width="1200" height="3" fill="url(#accentGrad)" rx="12"/>
+      <!-- Minimap -->
+      <rect x="622" y="58" width="20" height="226" fill="#0d1013" opacity="0.8"/>
+      <rect x="622" y="58" width="1" height="226" fill="#7c8891" opacity="0.07"/>
+      <rect x="625" y="74" width="12" height="1.5" rx="0.5" fill="#7c8891" opacity="0.25"/>
+      <rect x="625" y="79" width="8" height="1.5" rx="0.5" fill="#7c8891" opacity="0.2"/>
+      <rect x="625" y="84" width="14" height="1.5" rx="0.5" fill="#7c8891" opacity="0.25"/>
+      <rect x="625" y="89" width="10" height="1.5" rx="0.5" fill="#863bff" opacity="0.45"/>
+      <rect x="625" y="94" width="12" height="1.5" rx="0.5" fill="#7c8891" opacity="0.2"/>
+      <rect x="625" y="99" width="6" height="1.5" rx="0.5" fill="#7c8891" opacity="0.15"/>
+      <rect x="625" y="104" width="11" height="1.5" rx="0.5" fill="#7c8891" opacity="0.2"/>
+
+      <!-- Status bar -->
+      <rect x="0" y="256" width="642" height="28" rx="0" fill="#12161a"/>
+      <rect x="0" y="256" width="642" height="1" fill="#7c8891" opacity="0.12"/>
+      <!-- Status bar items -->
+      <text x="12" y="273" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#7c8891">⎇ main</text>
+      <text x="58" y="273" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#4d5560">|</text>
+      <text x="65" y="273" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#7c8891">TypeScript</text>
+      <!-- Right status -->
+      <text x="530" y="273" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#7c8891" text-anchor="end">Ln 4, Col 28</text>
+      <text x="545" y="273" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#4d5560">UTF-8</text>
+      <text x="630" y="273" font-family="'JetBrains Mono', Consolas, monospace" font-size="9" fill="#7c8891">Dark</text>
+    </g>
+
+    <!-- ══ Bottom: Author line ══ -->
+    <text x="600" y="322" font-family="'Jost', 'DM Sans', system-ui, sans-serif" font-size="10" font-weight="300" fill="#4d5560" text-anchor="middle" letter-spacing="2">BUILT WITH REACT · MONACO · WEB PLATFORM</text>
+  </g>
 </svg>
